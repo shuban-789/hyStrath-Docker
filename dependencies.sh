@@ -11,3 +11,12 @@ export WM_PROJECT_USER_DIR=$HOME/usrprojdir
  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 7 -y 
  sudo update-alternatives --config gcc -y
  sudo update-alternatives --config g++ -y
+
+echo "Are OpenFOAM and ThirdParty downloaded? "
+read inp
+if [ $inp == "n" ]; then
+ echo "Download OpenFOAM and ThirdParty, unzip them, then change the environment variables accordingly"
+elif [ $inp == "y" ]; then
+
+else
+ echo "invalid"
