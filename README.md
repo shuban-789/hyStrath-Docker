@@ -1,6 +1,7 @@
 # Dependencies
 
 - Critical utilities to get the install script to work
+- `sudo add-apt-repository ppa:rock-core/qt4`
 
 # Environment variables
 
