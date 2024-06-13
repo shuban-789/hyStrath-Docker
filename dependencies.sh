@@ -3,7 +3,7 @@ mkdir $HOME/projdir
 mkdir $HOME/usrprojdir
 
 export WM_PROJECT_NAME=hyStrathProject
-export WM_PROJECT_DIR=$HOME/projdir
+export WM_PROJECT_DIR=$HOME/Downloads/OpenFOAM-v2112
 export WM_PROJECT_USER_DIR=$HOME/usrprojdir
 
  sudo apt-get install g++-7 gcc-7 -y
