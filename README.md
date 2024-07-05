@@ -22,8 +22,11 @@ In cmdline, type:
 dsmcFoam+
 ```
 
-Boot paraview and plug in the Foam file to view results.
+Boot paraview and plug in the Foam file to view results. Switch the tabs on the top to change the variable of focus.
 
 ```
 paraview
 ```
+
+
+![image](https://github.com/shuban-789/hyStrath-notes/assets/67974101/cb1bcee9-50f0-4347-9e9d-45ce44127bb3)
