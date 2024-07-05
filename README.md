@@ -21,3 +21,9 @@ In cmdline, type:
 ```
 dsmcFoam+
 ```
+
+Boot paraview and plug in the Foam file to view results.
+
+```
+paraview
+```
