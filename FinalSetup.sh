@@ -72,3 +72,4 @@ prompt
 
 
 echo "=== Installing Modules ==="
+./install.sh NUMPROCS 2>/dev/null
