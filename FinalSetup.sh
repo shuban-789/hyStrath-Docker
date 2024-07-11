@@ -1,7 +1,12 @@
 #!/bin/bash
 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
 function dependency_installation() {
-    echo "=== Installing Dependencies ==="
+    echo "${GREEN}=== Installing Dependencies ===${NC}"
     sudo apt-get update
     sudo apt-get install g++-7 gcc-7
     sudo add-apt-repository ppa:rock-core/qt4
@@ -16,7 +21,7 @@ function dependency_installation() {
 }
 
 function openfoam_download() {
-    echo "=== Downloading OpenFOAM and ThirdParty ==="
+    echo "${GREEN}=== Downloading OpenFOAM and ThirdParty ===${NC}"
     cd $HOME/Downloads
     wget 'https://phoenixnap.dl.sourceforge.net/project/openfoam/v1706/ThirdParty-v1706.tgz'
     wget 'https://phoenixnap.dl.sourceforge.net/project/openfoam/v1706/OpenFOAM-v1706.tgz'
@@ -27,14 +32,14 @@ function openfoam_download() {
 }
 
 function openfoam_install() {
-    echo "=== Installing OpenFOAM ==="
+    echo "${GREEN}=== Installing OpenFOAM ===${NC}"
     cd OpenFOAM-v1706
     source ./etc/bashrc
     ./Allwmake
 }
 
 function hystrath_clone {
-    echo "=== Cloning hyStrath ==="
+    echo "${GREEN}=== Cloning hyStrath ===${NC}"
     cd $WM_PROJECT_USER_DIR
     git clone https://github.com/hystrath/hyStrath.git --branch master --single-branch && cd hyStrath/
 }
@@ -71,7 +76,7 @@ function prompt() {
 }
 
 function partition_sequence() {
-    echo "Before installing the modules, please confirm that the /run filesystem is not full."
+    echo "${YELLOW}Before installing the modules, please confirm that the /run filesystem is not full.${NC}"
     echo "-----------------------------------------------------------------------------------"
     du -h
     echo "-----------------------------------------------------------------------------------"
@@ -79,6 +84,52 @@ function partition_sequence() {
 }
 
 function module_installtion() {
-    echo "=== Installing Modules ==="
+    sudo su
+    echo "${GREEN}=== Installing Modules ===${NC}"
+    pwd
     ./install.sh NUMPROCS 2>/dev/null
 }
+echo """
+[1] Install Dependencies
+[2] Download OpenFOAM
+[3] Install OpenFOAM
+[4] Clone hyStrath
+[5] Partition Sequence
+[6] Install modules
+[7] Full Setup
+
+Input seqeunces are also accepted:
+${GREEN}e.g. '1 3 6' to do steps 1 3 and 6 ${NC}
+"""
+echo -n ">>> "
+read sequence
+
+if [ "$sequence" = "7" ]; then {
+    sequence="1 2 3 4 5 6"
+} fi
+
+for step in $sequence; do {
+    case $step in {
+        1)
+            dependency_installation
+            ;;
+        2)
+            openfoam_download
+            ;;
+        3)
+            openfoam_install
+            ;;
+        4)
+            hystrath_clone
+            ;;
+        5)
+            partition_sequence
+            ;;
+        6)
+            module_installtion
+            ;;
+        *)
+            echo "Invalid step: $step"
+            ;;
+    } esac
+} done
