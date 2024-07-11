@@ -51,20 +51,20 @@ function partition() {
 }
 
 function prompt() {
-    echo -n "Partition? (yY/nN) "
+    echo -n "${YELLOW}Partition? (yY/nN)${NC} "
     read opt
     if [[ $opt == "Y" ] || [ $opt == "y" ]]; then {
-        echo -n "Size? (e.g. 1G/1M/1K/auto) "
+        echo -n "${YELLOW}Size? (e.g. 1G/1M/1K/auto)${NC} "
         read opt2
         if [ $opt2 == "auto" ]; then {
             partition "1G"
         } else {
-            echo -n "You want to give /run a size of $opt2? (yY/nN) "
+            echo -n "${RED}You want to give /run a size of $opt2? (yY/nN)${NC} "
             read opt3
             if [[ $opt3 == "Y" ] || [ $opt3 == "y" ]]; then {
                 partition "$opt2"
             } else {
-                echo "Auto partitioning..."
+                echo "${GREEN}Auto partitioning...${NC}"
                 partition "1G"
             } fi
         } fi
@@ -111,25 +111,31 @@ if [ "$sequence" = "7" ]; then {
 for step in $sequence; do {
     case $step in {
         1)
+            echo -e "${GREEN}Installing dependencies...${NC}"
             dependency_installation
             ;;
         2)
+            echo -e "${GREEN}Downloading OpenFOAM...${NC}"
             openfoam_download
             ;;
         3)
+            echo -e "${GREEN}Installing OpenFOAM...${NC}"
             openfoam_install
             ;;
         4)
+            echo -e "${GREEN}Cloning hyStrath...${NC}"
             hystrath_clone
             ;;
         5)
+            echo -e "${GREEN}Starting partition sequence for /run...${NC}"
             partition_sequence
             ;;
         6)
+            echo -e "${GREEN}Starting hyStrath module installation...${NC}"
             module_installtion
             ;;
         *)
-            echo "Invalid step: $step"
+            echo "${RED}Invalid step: $step${NC}"
             ;;
     } esac
 } done
