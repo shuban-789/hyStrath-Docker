@@ -31,11 +31,11 @@ paraview
 
 ![image](https://github.com/shuban-789/hyStrath-notes/assets/67974101/cb1bcee9-50f0-4347-9e9d-45ce44127bb3)
 
-# Notes
+# Notes on Docker Install
 
-# Unable to Install
+## Section 1: Unable to Install
 
-Failed on Docker, `FROM ubuntu 20.04`
+✅ Successful on Docker, but the following could not be found
 ```
 E: Unable to locate package qt4-dev-tools
 E: Package 'libqt4-dev' has no installation candidate
@@ -43,7 +43,25 @@ E: Unable to locate package libqt4-opengl-dev
 E: Unable to locate package libqtwebkit-dev
 ```
 
-# Extra Utilities
-```
-wget
-```
+> Fix: Add repositories for lipqt before running `apt-update`
+
+## Section 2: OpenFOAM and Thirdparty Download
+✅ Successful on Docker, but `wget` was not installed
+
+> Small Fix: Add wget to the install script (DONE)
+
+## Section 2: OpenFOAM installation and setup (Allwmake)
+✅ Successful on Docker
+
+## Section 4: Cloning hyStrath
+✅ Successful on Docker, but `git` was not installed
+
+> Small Fix: Add git to the install script (DONE)
+
+## Section 5: 
+✅ Successful on Docker, but Weird error with `$WM_PROJECT_DIR`
+
+> Fix: For now clone it manually, edit Dockerfile to run from /root
+
+## Section 6 (last section)
+TBD
