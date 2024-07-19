@@ -7,7 +7,7 @@ function dependency_installation() {
     apt-get update
     apt-get install g++-7 gcc-7
     add-apt-repository ppa:rock-core/qt4
-    apt-get install build-essential flex bison cmake zlib1g-dev libboost-system-dev libboost-thread-dev libopenmpi-dev openmpi-bin gnuplot libreadline-dev libncurses-dev libxt-dev
+    apt-get install build-essential flex bison cmake zlib1g-dev libboost-system-dev libboost-thread-dev libopenmpi-dev openmpi-bin gnuplot libreadline-dev libncurses-dev libxt-dev wget
     apt-get install qt4-dev-tools libqt4-dev libqt4-opengl-dev freeglut3-dev libqtwebkit-dev
     apt-get install libscotch-dev libcgal-dev
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 7
