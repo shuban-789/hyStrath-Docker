@@ -2,8 +2,8 @@ FROM ubuntu:20.04
 
 WORKDIR $HOME
 
-COPY FinalSetup.sh
+COPY build.sh .
 
-RUN chmod +x FinalSetup.sh
+RUN chmod +x build.sh
 
 CMD ["bash", "FinalSetup.sh"]
