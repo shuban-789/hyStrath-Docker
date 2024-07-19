@@ -30,3 +30,13 @@ paraview
 
 
 ![image](https://github.com/shuban-789/hyStrath-notes/assets/67974101/cb1bcee9-50f0-4347-9e9d-45ce44127bb3)
+
+# Notes
+
+Failed on Docker, `FROM ubuntu 20.04`
+```
+E: Unable to locate package qt4-dev-tools
+E: Package 'libqt4-dev' has no installation candidate
+E: Unable to locate package libqt4-opengl-dev
+E: Unable to locate package libqtwebkit-dev
+```
