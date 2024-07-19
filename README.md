@@ -33,35 +33,3 @@ paraview
 
 # Notes on Docker Install
 
-## Section 1: Unable to Install
-
-✅ Successful on Docker, but the following could not be found
-```
-E: Unable to locate package qt4-dev-tools
-E: Package 'libqt4-dev' has no installation candidate
-E: Unable to locate package libqt4-opengl-dev
-E: Unable to locate package libqtwebkit-dev
-```
-
-> Fix: Add repositories for lipqt before running `apt-update`
-
-## Section 2: OpenFOAM and Thirdparty Download
-✅ Successful on Docker, but `wget` was not installed
-
-> Small Fix: Add wget to the install script (DONE)
-
-## Section 2: OpenFOAM installation and setup (Allwmake)
-✅ Successful on Docker
-
-## Section 4: Cloning hyStrath
-✅ Successful on Docker, but `git` was not installed
-
-> Small Fix: Add git to the install script (DONE)
-
-## Section 5: 
-✅ Successful on Docker, but Weird error with `$WM_PROJECT_DIR`
-
-> Fix: For now clone it manually, edit Dockerfile to run from /root
-
-## Section 6 (last section)
-TBD
