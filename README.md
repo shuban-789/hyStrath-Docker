@@ -33,10 +33,17 @@ paraview
 
 # Notes
 
+# Unable to Install
+
 Failed on Docker, `FROM ubuntu 20.04`
 ```
 E: Unable to locate package qt4-dev-tools
 E: Package 'libqt4-dev' has no installation candidate
 E: Unable to locate package libqt4-opengl-dev
 E: Unable to locate package libqtwebkit-dev
+```
+
+# Extra Utilities
+```
+wget
 ```
