@@ -24,3 +24,9 @@ paraview
 
 # Notes on Docker Install
 
+- Step 1: SUCCESS, BUT 5 packages were unable to install
+- Step 2: SUCCESS
+- Step 3: SUCCESS
+- Step 4: SUCCESS, BUT git was not installed
+- Step 5: N/A
+- Step 6: FAIL, recheck dependencies
