@@ -1,28 +1,27 @@
 #!/bin/bash
 
-# NOTICE: Script does not run commands using sudo as it is fitted to perform inside a Docker container
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
 
 function dependency_installation() {
-    echo "=== Installing Dependencies ==="
-    apt-get update
-    apt-get install g++-7 gcc-7
-    apt-get install software-properties-common
-    add-apt-repository ppa:rock-core/qt4
-    apt-get update
-    apt-get install build-essential flex bison cmake zlib1g-dev libboost-system-dev libboost-thread-dev libopenmpi-dev openmpi-bin gnuplot libreadline-dev libncurses-dev libxt-dev
-    apt-get install qt4-dev-tools libqt4-dev libqt4-opengl-dev freeglut3-dev libqtwebkit-dev
-    apt-get install libscotch-dev libcgal-dev
-    apt-get install wget git
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 7
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 7
+    echo "${GREEN}=== Installing Dependencies ===${NC}"
+    sudo apt-get update
+    sudo apt-get install g++-7 gcc-7
+    sudo add-apt-repository ppa:rock-core/qt4
+    sudo apt-get install build-essential flex bison cmake zlib1g-dev libboost-system-dev libboost-thread-dev libopenmpi-dev openmpi-bin gnuplot libreadline-dev libncurses-dev libxt-dev
+    sudo apt-get install qt4-dev-tools libqt4-dev libqt4-opengl-dev freeglut3-dev libqtwebkit-dev
+    sudo apt-get install libscotch-dev libcgal-dev
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 7
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 7
     echo " "
     echo "=== GCC Version ==="
     gcc --version
-    echo " "
 }
 
 function openfoam_download() {
-    echo "=== Downloading OpenFOAM and ThirdParty ==="
+    echo "${GREEN}=== Downloading OpenFOAM and ThirdParty ===${NC}"
     cd $HOME/Downloads
     wget 'https://phoenixnap.dl.sourceforge.net/project/openfoam/v1706/ThirdParty-v1706.tgz'
     wget 'https://phoenixnap.dl.sourceforge.net/project/openfoam/v1706/OpenFOAM-v1706.tgz'
@@ -30,49 +29,46 @@ function openfoam_download() {
     echo "=== Extracting OpenFOAM and ThirdParty ==="
     tar xfv ThirdParty-v1706.tgz
     tar xfv OpenFOAM-v1706.tgz
-    echo " "
 }
 
 function openfoam_install() {
-    echo "=== Installing OpenFOAM ==="
+    echo "${GREEN}=== Installing OpenFOAM ===${NC}"
     cd OpenFOAM-v1706
     source ./etc/bashrc
     ./Allwmake
-    echo " "
 }
 
 function hystrath_clone {
-    echo "=== Cloning hyStrath ==="
+    echo "${GREEN}=== Cloning hyStrath ===${NC}"
     cd $WM_PROJECT_USER_DIR
     git clone https://github.com/hystrath/hyStrath.git --branch master --single-branch && cd hyStrath/
-    echo " "
 }
 
 function partition() {
     size=$1
     echo "tmpfs /run tmpfs defaults,size=$size 0 0" >> /etc/fstab
-    mount -o remount /run
+    sudo mount -o remount /run
 }
 
 function prompt() {
-    echo -n "Partition? (yY/nN) "
+    echo -n "${YELLOW}Partition? (yY/nN)${NC} "
     read opt
-    if [ $opt == "Y" ] || [ $opt == "y" ]; then {
-        echo -n "Size? (e.g. 1G/1M/1K/auto) "
+    if [[ $opt == "Y" ] || [ $opt == "y" ]]; then {
+        echo -n "${YELLOW}Size? (e.g. 1G/1M/1K/auto)${NC} "
         read opt2
         if [ $opt2 == "auto" ]; then {
             partition "1G"
         } else {
-            echo -n "You want to give /run a size of $opt2? (yY/nN) "
+            echo -n "${RED}You want to give /run a size of $opt2? (yY/nN)${NC} "
             read opt3
-            if [ $opt3 == "Y" ] || [ $opt3 == "y" ]; then {
+            if [[ $opt3 == "Y" ] || [ $opt3 == "y" ]]; then {
                 partition "$opt2"
             } else {
-                echo "Auto partitioning..."
+                echo "${GREEN}Auto partitioning...${NC}"
                 partition "1G"
             } fi
         } fi
-    } elif [ $opt == "N" ] || [ $opt == "n" ]; then {
+    } elif [[ $opt == "N" ] || [ $opt == "n" ]]; then {
         echo "Continuing..."
     } else {
         prompt
@@ -80,7 +76,7 @@ function prompt() {
 }
 
 function partition_sequence() {
-    echo "Before installing the modules, please confirm that the /run filesystem is not full."
+    echo "${YELLOW}Before installing the modules, please confirm that the /run filesystem is not full.${NC}"
     echo "-----------------------------------------------------------------------------------"
     du -h
     echo "-----------------------------------------------------------------------------------"
@@ -88,11 +84,10 @@ function partition_sequence() {
 }
 
 function module_installtion() {
-    su
-    echo "=== Installing Modules ==="
+    sudo su
+    echo "${GREEN}=== Installing Modules ===${NC}"
     pwd
-    printf '4' | ./install.sh NUMPROCS 2>/dev/null
-    echo " "
+    ./install.sh NUMPROCS 2>/dev/null
 }
 echo """
 [1] Install Dependencies
@@ -102,10 +97,9 @@ echo """
 [5] Partition Sequence
 [6] Install modules
 [7] Full Setup
-[8] Full Setup without Partition Sequence
 
 Input seqeunces are also accepted:
-e.g. '1 3 6' to do steps 1 3 and 6 
+${GREEN}e.g. '1 3 6' to do steps 1 3 and 6 ${NC}
 """
 echo -n ">>> "
 read sequence
@@ -114,38 +108,34 @@ if [ "$sequence" = "7" ]; then {
     sequence="1 2 3 4 5 6"
 } fi
 
-if [ "$sequence" = "8" ]; then {
-    sequence="1 2 3 4 6"
-} fi
-
 for step in $sequence; do {
-    case $step in
+    case $step in {
         1)
-            echo -e "Installing dependencies..."
+            echo -e "${GREEN}Installing dependencies...${NC}"
             dependency_installation
             ;;
         2)
-            echo -e "Downloading OpenFOAM..."
+            echo -e "${GREEN}Downloading OpenFOAM...${NC}"
             openfoam_download
             ;;
         3)
-            echo -e "Installing OpenFOAM..."
+            echo -e "${GREEN}Installing OpenFOAM...${NC}"
             openfoam_install
             ;;
         4)
-            echo -e "Cloning hyStrath..."
+            echo -e "${GREEN}Cloning hyStrath...${NC}"
             hystrath_clone
             ;;
         5)
-            echo -e "Starting partition sequence for /run..."
+            echo -e "${GREEN}Starting partition sequence for /run...${NC}"
             partition_sequence
             ;;
         6)
-            echo -e "Starting hyStrath module installation..."
+            echo -e "${GREEN}Starting hyStrath module installation...${NC}"
             module_installtion
             ;;
         *)
-            echo "Invalid step: $step"
+            echo "${RED}Invalid step: $step${NC}"
             ;;
-    esac
+    } esac
 } done

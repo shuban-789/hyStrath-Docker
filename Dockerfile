@@ -6,4 +6,4 @@ COPY build.sh .
 
 RUN chmod +x build.sh
 
-CMD ["bash", "build.sh"]
+CMD ["bash", "FinalSetup.sh"]
