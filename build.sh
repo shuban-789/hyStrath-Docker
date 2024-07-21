@@ -6,7 +6,9 @@ function dependency_installation() {
     echo "=== Installing Dependencies ==="
     apt-get update
     apt-get install g++-7 gcc-7
+    apt-get install software-properties-common
     add-apt-repository ppa:rock-core/qt4
+    apt-get update
     apt-get install build-essential flex bison cmake zlib1g-dev libboost-system-dev libboost-thread-dev libopenmpi-dev openmpi-bin gnuplot libreadline-dev libncurses-dev libxt-dev
     apt-get install qt4-dev-tools libqt4-dev libqt4-opengl-dev freeglut3-dev libqtwebkit-dev
     apt-get install libscotch-dev libcgal-dev
@@ -16,6 +18,7 @@ function dependency_installation() {
     echo " "
     echo "=== GCC Version ==="
     gcc --version
+    echo " "
 }
 
 function openfoam_download() {
@@ -27,6 +30,7 @@ function openfoam_download() {
     echo "=== Extracting OpenFOAM and ThirdParty ==="
     tar xfv ThirdParty-v1706.tgz
     tar xfv OpenFOAM-v1706.tgz
+    echo " "
 }
 
 function openfoam_install() {
@@ -34,12 +38,14 @@ function openfoam_install() {
     cd OpenFOAM-v1706
     source ./etc/bashrc
     ./Allwmake
+    echo " "
 }
 
 function hystrath_clone {
     echo "=== Cloning hyStrath ==="
     cd $WM_PROJECT_USER_DIR
     git clone https://github.com/hystrath/hyStrath.git --branch master --single-branch && cd hyStrath/
+    echo " "
 }
 
 function partition() {
@@ -85,7 +91,8 @@ function module_installtion() {
     su
     echo "=== Installing Modules ==="
     pwd
-    ./install.sh NUMPROCS 2>/dev/null
+    printf '4' | ./install.sh NUMPROCS 2>/dev/null
+    echo " "
 }
 echo """
 [1] Install Dependencies
