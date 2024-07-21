@@ -30,3 +30,10 @@ paraview
 - Step 4: SUCCESS, BUT git was not installed
 - Step 5: N/A
 - Step 6: FAIL, recheck dependencies
+
+```
+E: Unable to locate package qt4-dev-tools
+E: Package 'libqt4-dev' has no installation candidate
+E: Unable to locate package libqt4-opengl-dev
+E: Unable to locate package libqtwebkit-dev
+```
