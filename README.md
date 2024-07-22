@@ -24,6 +24,8 @@ paraview
 
 # Notes on Docker Install
 
+## Run 1
+
 - Step 1: SUCCESS, BUT 5 packages were unable to install
 - Step 2: SUCCESS
 - Step 3: SUCCESS
@@ -37,3 +39,12 @@ E: Package 'libqt4-dev' has no installation candidate
 E: Unable to locate package libqt4-opengl-dev
 E: Unable to locate package libqtwebkit-dev
 ```
+
+## Run 2
+
+- Step 1: SUCCESS
+- Step 2: SUCCESS
+- Step 3: SUCCESS
+- Step 4: ONGOING
+- Step 5: N/A
+- Step 6: NOT STARTED
