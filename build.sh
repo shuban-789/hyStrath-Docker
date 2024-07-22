@@ -94,6 +94,7 @@ function module_installtion() {
     printf '4' | ./install.sh NUMPROCS 2>/dev/null
     echo " "
 }
+
 echo """
 [1] Install Dependencies
 [2] Download OpenFOAM
