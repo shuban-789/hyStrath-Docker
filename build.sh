@@ -87,9 +87,8 @@ function partition_sequence() {
 }
 
 function module_installtion() {
-    su
     echo "=== Installing Modules ==="
-    pwd
+    source /root/OpenFOAM-v1706/etc/bashrc
     printf '4' | ./install.sh NUMPROCS 2>/dev/null
     echo " "
 }
