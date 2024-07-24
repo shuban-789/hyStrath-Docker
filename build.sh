@@ -89,6 +89,7 @@ function partition_sequence() {
 function module_installtion() {
     echo "=== Installing Modules ==="
     source /root/OpenFOAM-v1706/etc/bashrc
+    export PATH=/root/OpenFOAM-v1706/wmake:$PATH
     printf '4' | ./install.sh NUMPROCS 2>/dev/null
     echo " "
 }
