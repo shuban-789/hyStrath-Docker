@@ -23,7 +23,6 @@ function dependency_installation() {
 
 function openfoam_download() {
     echo "=== Downloading OpenFOAM and ThirdParty ==="
-    cd $HOME/Downloads
     wget 'https://phoenixnap.dl.sourceforge.net/project/openfoam/v1706/ThirdParty-v1706.tgz'
     wget 'https://phoenixnap.dl.sourceforge.net/project/openfoam/v1706/OpenFOAM-v1706.tgz'
 
