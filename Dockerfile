@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-CMD ["cd", "$HOME"]
+WORKDIR /root
 
 COPY build.sh .
 
