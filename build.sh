@@ -87,11 +87,14 @@ function partition_sequence() {
     prompt
 }
 
+# 1. Fix [ENTER] for add repository 
+# 2. Fix automation on part 6
+
 function module_installtion() {
     echo "=== Installing Modules ==="
     source /root/OpenFOAM-v1706/etc/bashrc
     export PATH=/root/OpenFOAM-v1706/wmake:$PATH
-    printf '4' | ./install.sh NUMPROCS 2>/dev/null
+    printf '4' | ./install.sh
     echo " "
 }
 
