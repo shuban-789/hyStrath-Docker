@@ -8,6 +8,19 @@ docker pull shubanpcs/hystrath:release-v1
 
 🔗 [DockerHub](https://hub.docker.com/r/shubanpcs/hystrath)
 
+# Installation
+
+## Method 1:
+
+1. Clone this repository or download the release
+2. Unzip if needed
+3. `# docker build -t hystrath .`
+
+## Method 2:
+
+1. Pull the image from [DockerHub](https://hub.docker.com/r/shubanpcs/hystrath)
+2. `# docker exec -it <ID> /bin/bash`
+
 # Loading systems
 
 In templated systems, first run the `Allrun` script to create vital files. You will have to recreate this script for your own simulation.
