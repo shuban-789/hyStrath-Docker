@@ -10,13 +10,13 @@ docker pull shubanpcs/hystrath:release-v1
 
 # Installation
 
-## Method 1:
+### Method 1:
 
 1. Clone this repository or download the release
 2. Unzip if needed
 3. `# docker build -t hystrath .`
 
-## Method 2:
+### Method 2:
 
 1. Pull the image from [DockerHub](https://hub.docker.com/r/shubanpcs/hystrath)
 2. `# docker exec -it <ID> /bin/bash`
