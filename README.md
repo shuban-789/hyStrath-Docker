@@ -24,7 +24,7 @@ Dockerization of the [hyStrath](https://github.com/hystrath/hyStrath) simulation
 
 # Loading systems
 
-In templated systems, first run the `Allrun` script to create vital files. You will have to recreate this script for your own simulation.
+In templated systems, first run the `./Allrun` script to create vital files. You will have to recreate this script for your own simulation.
 
 In cmdline, type:
 ```
