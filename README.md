@@ -15,21 +15,12 @@ Dockerization of the [hyStrath](https://github.com/hystrath/hyStrath) simulation
 
 1. Clone this repository or download the release
 2. Unzip if needed
-3. Run the command below:
-```
-docker build -t hystrath .
-```
+3. Build the container using the command: `docker build -t hystrath .`
 
 ### Method 2:
 
-1. Pull the image from DockerHub using the command below:
-```
-docker pull shubanpcs/hystrath:release-v1
-```
-2. Enter the shell using the command below:
-```
-docker exec -it <ID> /bin/bash`
-```
+1. Pull the image from DockerHub using the command: `docker pull shubanpcs/hystrath:release-v1`
+2. Enter the shell using the command: `docker exec -it <ID> /bin/bash`
 
 # Loading systems
 
