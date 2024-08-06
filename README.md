@@ -3,7 +3,7 @@
 Dockerization of the [hyStrath](https://github.com/hystrath/hyStrath) simulation software using the OpenFOAM environment.
 
 ```
-docker push shubanpcs/hystrath:release-v1
+docker pull shubanpcs/hystrath:release-v1
 ```
 
 🔗 [DockerHub](https://hub.docker.com/r/shubanpcs/hystrath)
