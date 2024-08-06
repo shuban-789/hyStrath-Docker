@@ -4,13 +4,10 @@ Dockerization of the [hyStrath](https://github.com/hystrath/hyStrath) simulation
 
 ```
 ⚙️ OS: Ubuntu 20.04 (Focal Fossa)
-📁 Size: 2.44 GB
+📁 Compressed Size: 2.44 GB
 🔗 DockerHub: https://hub.docker.com/r/shubanpcs/hystrath
 ```
 
-```
-docker pull shubanpcs/hystrath:release-v1
-```
 
 # Installation
 
@@ -18,12 +15,21 @@ docker pull shubanpcs/hystrath:release-v1
 
 1. Clone this repository or download the release
 2. Unzip if needed
-3. `# docker build -t hystrath .`
+3. Run the command below:
+```
+docker build -t hystrath .
+```
 
 ### Method 2:
 
-1. Pull the image from [DockerHub](https://hub.docker.com/r/shubanpcs/hystrath)
-2. `# docker exec -it <ID> /bin/bash`
+1. Pull the image from DockerHub using the command below:
+   ```
+   docker pull shubanpcs/hystrath:release-v1
+   ```
+2. Enter the shell using the command below:
+   ```
+   # docker exec -it <ID> /bin/bash`
+  ```
 
 # Loading systems
 
