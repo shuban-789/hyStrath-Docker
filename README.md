@@ -3,10 +3,14 @@
 Dockerization of the [hyStrath](https://github.com/hystrath/hyStrath) simulation software using the OpenFOAM environment. Setup includes modular scripts split into 5 parts and a simple installation process
 
 ```
-docker pull shubanpcs/hystrath:release-v1
+⚙️ OS: Ubuntu 20.04 (Focal Fossa)
+📁 Size: 2.44 GB
+🔗 DockerHub: https://hub.docker.com/r/shubanpcs/hystrath
 ```
 
-🔗 [DockerHub](https://hub.docker.com/r/shubanpcs/hystrath)
+```
+docker pull shubanpcs/hystrath:release-v1
+```
 
 # Installation
 
