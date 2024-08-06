@@ -1,8 +1,11 @@
 #!/bin/bash
 
-# NOTICE: Script does not run commands using sudo as it is fitted to perform inside a Docker container
+# NOTICE (1): Script does not run commands using sudo as it is fitted to perform inside a Docker container.
+# NOTICE (2): Script is supposed to be fully automatic. Please submit an issue if you find a malfunction.
 
 function dependency_installation() {
+    set -e
+
     echo "=== Installing Dependencies ==="
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
@@ -23,6 +26,8 @@ function dependency_installation() {
 }
 
 function openfoam_download() {
+    set -e
+
     echo "=== Downloading OpenFOAM and ThirdParty ==="
     wget 'https://phoenixnap.dl.sourceforge.net/project/openfoam/v1706/ThirdParty-v1706.tgz'
     wget 'https://phoenixnap.dl.sourceforge.net/project/openfoam/v1706/OpenFOAM-v1706.tgz'
@@ -34,68 +39,44 @@ function openfoam_download() {
 }
 
 function openfoam_install() {
+    set -e
+
     echo "=== Installing OpenFOAM ==="
     cd OpenFOAM-v1706
     source ./etc/bashrc
-    ./Allwmake
+    ./Allwmake -j
     echo " "
 }
 
 function hystrath_clone {
-    echo "=== Cloning hyStrath ==="
-    cd $WM_PROJECT_USER_DIR
-    git clone https://github.com/hystrath/hyStrath.git --branch master --single-branch && cd hyStrath/
-    echo " "
-}
+    set -e
+    set -x
 
-function partition() {
-    size=$1
-    echo "tmpfs /run tmpfs defaults,size=$size 0 0" >> /etc/fstab
-    mount -o remount /run
+    export USER=root
+    source /root/OpenFOAM-v1706/etc/bashrc
+    mkdir -p "$WM_PROJECT_USER_DIR"
+    cd "$WM_PROJECT_USER_DIR"
+    echo "=== Cloning hyStrath in $PWD ==="
+    git init hyStrath
+    cd hyStrath
+    git remote add origin https://github.com/hystrath/hyStrath.git
+    COMMIT_HASH='984e3000a5f8d2e47cee555ec466d58ea9a6315d'
+    git fetch --depth 1 origin "$COMMIT_HASH"
+    git branch master "$COMMIT_HASH"
+    git checkout
 }
-
-function prompt() {
-    echo -n "Partition? (yY/nN) "
-    read opt
-    if [ $opt == "Y" ] || [ $opt == "y" ]; then {
-        echo -n "Size? (e.g. 1G/1M/1K/auto) "
-        read opt2
-        if [ $opt2 == "auto" ]; then {
-            partition "1G"
-        } else {
-            echo -n "You want to give /run a size of $opt2? (yY/nN) "
-            read opt3
-            if [ $opt3 == "Y" ] || [ $opt3 == "y" ]; then {
-                partition "$opt2"
-            } else {
-                echo "Auto partitioning..."
-                partition "1G"
-            } fi
-        } fi
-    } elif [ $opt == "N" ] || [ $opt == "n" ]; then {
-        echo "Continuing..."
-    } else {
-        prompt
-    } fi
-}
-
-function partition_sequence() {
-    echo "Before installing the modules, please confirm that the /run filesystem is not full."
-    echo "-----------------------------------------------------------------------------------"
-    du -h
-    echo "-----------------------------------------------------------------------------------"
-    prompt
-}
-
-# TODO
-# Fix automation on part 6
 
 function module_installtion() {
+    set -e
+    set -x
+
     echo "=== Installing Modules ==="
     source /root/OpenFOAM-v1706/etc/bashrc
-    export PATH=/root/OpenFOAM-v1706/wmake:$PATH
-    printf '4' | ./install.sh
-    echo " "
+    cd "$WM_PROJECT_USER_DIR/hyStrath"
+    export PATH="/root/OpenFOAM-v1706/wmake:$PATH"
+    ./build/install-CFD.sh "$(nproc)"
+    ./build/install-DSMC.sh "$(nproc)"
+    ./build/install-hybridPICDSMC.sh "$(nproc)"
 }
 
 echo """
@@ -103,10 +84,8 @@ echo """
 [2] Download OpenFOAM
 [3] Install OpenFOAM
 [4] Clone hyStrath
-[5] Partition Sequence
-[6] Install modules
-[7] Full Setup
-[8] Full Setup without Partition Sequence
+[5] Install modules
+[6] Full Setup
 
 Input seqeunces are also accepted:
 e.g. '1 3 6' to do steps 1 3 and 6 
@@ -114,12 +93,8 @@ e.g. '1 3 6' to do steps 1 3 and 6
 echo -n ">>> "
 read sequence
 
-if [ "$sequence" = "7" ]; then {
-    sequence="1 2 3 4 5 6"
-} fi
-
-if [ "$sequence" = "8" ]; then {
-    sequence="1 2 3 4 6"
+if [ "$sequence" = "6" ]; then {
+    sequence="1 2 3 4 5"
 } fi
 
 for step in $sequence; do {
@@ -141,10 +116,6 @@ for step in $sequence; do {
             hystrath_clone
             ;;
         5)
-            echo -e "Starting partition sequence for /run..."
-            partition_sequence
-            ;;
-        6)
             echo -e "Starting hyStrath module installation..."
             module_installtion
             ;;
