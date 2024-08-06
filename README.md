@@ -1,8 +1,10 @@
-# Dependencies
+# Description
 
-- Critical utilities to get the install script to work
-- Install OpenFOAM and ThirdParty from sourceforge
-- `sudo add-apt-repository ppa:rock-core/qt4`
+Dockerization of the hyStrath simulation software using the OpenFOAM environment
+
+```
+docker push shubanpcs/hystrath:release-v1
+```
 
 # Loading systems
 
@@ -19,32 +21,4 @@ Boot paraview and plug in the Foam file to view results. Switch the tabs on the 
 paraview
 ```
 
-
 ![image](https://github.com/shuban-789/hyStrath-notes/assets/67974101/cb1bcee9-50f0-4347-9e9d-45ce44127bb3)
-
-# Notes on Docker Install
-
-## Run 1
-
-- Step 1: SUCCESS, BUT 5 packages were unable to install
-- Step 2: SUCCESS
-- Step 3: SUCCESS
-- Step 4: SUCCESS, BUT git was not installed
-- Step 5: N/A
-- Step 6: FAIL, recheck dependencies
-
-```
-E: Unable to locate package qt4-dev-tools
-E: Package 'libqt4-dev' has no installation candidate
-E: Unable to locate package libqt4-opengl-dev
-E: Unable to locate package libqtwebkit-dev
-```
-
-## Run 2
-
-- Step 1: SUCCESS
-- Step 2: SUCCESS
-- Step 3: SUCCESS
-- Step 4: ONGOING
-- Step 5: N/A
-- Step 6: NOT STARTED
