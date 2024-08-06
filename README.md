@@ -23,13 +23,13 @@ docker build -t hystrath .
 ### Method 2:
 
 1. Pull the image from DockerHub using the command below:
-   ```
-   docker pull shubanpcs/hystrath:release-v1
-   ```
+```
+docker pull shubanpcs/hystrath:release-v1
+```
 2. Enter the shell using the command below:
-   ```
-   docker exec -it <ID> /bin/bash`
-   ```
+```
+docker exec -it <ID> /bin/bash`
+```
 
 # Loading systems
 
