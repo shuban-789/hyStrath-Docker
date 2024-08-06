@@ -6,7 +6,7 @@ Dockerization of the [hyStrath](https://github.com/hystrath/hyStrath) simulation
 docker push shubanpcs/hystrath:release-v1
 ```
 
-[DockerHub](https://hub.docker.com/r/shubanpcs/hystrath)
+🔗 [DockerHub](https://hub.docker.com/r/shubanpcs/hystrath)
 
 # Loading systems
 
