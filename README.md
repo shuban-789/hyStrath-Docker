@@ -1,6 +1,6 @@
 # Description
 
-Dockerization of the [hyStrath](https://github.com/hystrath/hyStrath) simulation software using the OpenFOAM environment.
+Dockerization of the [hyStrath](https://github.com/hystrath/hyStrath) simulation software using the OpenFOAM environment. Setup includes modular scripts split into 5 parts and a simple installation process
 
 ```
 docker pull shubanpcs/hystrath:release-v1
