@@ -28,7 +28,7 @@ docker build -t hystrath .
    ```
 2. Enter the shell using the command below:
    ```
-   # docker exec -it <ID> /bin/bash`
+   docker exec -it <ID> /bin/bash`
    ```
 
 # Loading systems
