@@ -24,17 +24,9 @@ Dockerization of the [hyStrath](https://github.com/hystrath/hyStrath) simulation
 
 # Loading systems
 
-In templated systems, first run the `./Allrun` script to create vital files. You will have to recreate this script for your own simulation.
-
-In cmdline, type:
-```
-dsmcFoam+
-```
-
-Boot paraview and plug in the Foam file to view results. Switch the tabs on the top to change the variable of focus.
-
-```
-paraview
-```
+In templated systems, first run the `./Allrun` script to after configuring system settings in the `system` directory of the system. Keep your system directory as a directory on your host and mount it everytime Docker is initiated. Pull the paraview Docker image and mount the files onto paraview, and run `./pvserver --server-port=11111` after `./Allrun` has completed its run. Connect to server using paraview client. 
 
 ![image](https://github.com/shuban-789/hyStrath-notes/assets/67974101/cb1bcee9-50f0-4347-9e9d-45ce44127bb3)
+
+# Notice Board
+
