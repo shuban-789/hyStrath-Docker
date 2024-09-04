@@ -30,6 +30,8 @@ In templated systems, first run the `./Allrun` script to after configuring syste
 
 # Notice Board
 
+### (Case 1) Run `./Allrun` as `root` 
+
 ```sh
 export OMPI_ALLOW_RUN_AS_ROOT=1
 export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
